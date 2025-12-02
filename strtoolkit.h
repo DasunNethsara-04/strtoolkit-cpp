@@ -70,6 +70,43 @@ bool StrCmp(const char* str1, const char* str2);
  */
 bool StrCmp(const std::string& str1, const std::string& str2);
 
+/**
+ * @brief Copies a C-style string into another buffer.
+ *
+ * Traverses the source string character by character using pointers
+ * and writes each character into the destination buffer until the
+ * null terminator ('\0') is reached. The null terminator is also
+ * copied to ensure the destination is a valid C-style string.
+ *
+ * @param src Pointer to the source null-terminated C-style string.
+ *            Must not be nullptr.
+ * @param dest Pointer to the destination buffer. Must be large enough
+ *             to hold all characters from src including the null terminator.
+ *
+ * @note Passing nullptr or insufficient buffer size results in undefined behavior.
+ * @example
+ * char buffer[20];
+ * StrCpy("Hello", buffer);
+ * // buffer now contains "Hello"
+ */
 void StrCpy(const char* src, char* dest);
 
+/**
+ * @brief Copies the contents of one std::string into another using pointer traversal.
+ *
+ * Resizes the destination string to match the source string length,
+ * then copies each character from the source into the destination
+ * using pointers. The null terminator is managed automatically by
+ * std::string and does not need to be copied manually.
+ *
+ * @param src Reference to the source std::string.
+ * @param dest Reference to the destination std::string, which will be resized
+ *             and overwritten with the contents of src.
+ *
+ * @example
+ * std::string a = "World";
+ * std::string b;
+ * StrCpy(a, b);
+ * // b now contains "World"
+ */
 void StrCpy(const std::string& src, std::string& dest);
