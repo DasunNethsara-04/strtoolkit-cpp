@@ -69,3 +69,7 @@ bool StrCmp(const char* str1, const char* str2);
  * bool equal = StrCmp(a, b); // true
  */
 bool StrCmp(const std::string& str1, const std::string& str2);
+
+void StrCpy(const char* src, char* dest);
+
+void StrCpy(const std::string& src, std::string& dest);
