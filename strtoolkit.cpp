@@ -40,8 +40,8 @@ bool StrCmp(const char* str1, const char* str2) {
 
 	while(*str1ptr != '\0' && *str2ptr != '\0') {
 		if (*str1ptr != *str2ptr) return false;
-		str1ptr++;
-		str2ptr++;
+		++str1ptr;
+		++str2ptr;
 	}
 	return *str1ptr == '\0' && *str2ptr == '\0';
 }
@@ -56,8 +56,36 @@ bool StrCmp(const std::string& str1, const std::string& str2) {
 
 	while (*str1ptr != '\0' && *str2ptr != '\0') {
 		if (*str1ptr != *str2ptr) return false;
-		str1ptr++;
-		str2ptr++;
+		++str1ptr;
+		++str2ptr;
 	}
 	return *str1ptr == '\0' && *str2ptr == '\0';
+}
+
+void StrCpy(const char* src, char* dest) {
+	const char* ptr1 = src;
+	char* ptr2 = dest;
+
+	while (*ptr1 != '\0')
+	{
+		*ptr2 = *ptr1;
+		++ptr1;
+		++ptr2;
+	}
+	*ptr2 = '\0';
+}
+
+void StrCpy(const std::string& src, std::string& dest) {
+	// this thing can easily can perform with dest = src.
+	// This is just a code to practice and test my knowledge about pointers
+	dest.resize(src.size());
+	const char* ptr1 = src.c_str();
+	char* ptr2 = &dest[0];
+
+	while (*ptr1 != '\0')
+	{
+		*ptr2 = *ptr1;
+		++ptr1;
+		++ptr2;
+	}
 }
