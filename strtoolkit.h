@@ -133,7 +133,6 @@ void StrCpy(const std::string& src, std::string& dest);
  * // buffer now contains "Hello World"
  */
 
-
 void StrCat(const char* src, char* dest);
 
 /**
@@ -153,3 +152,30 @@ void StrCat(const char* src, char* dest);
  * // a now contains "Hello World"
  */
 void StrCat(const std::string& src, std::string& dest);
+
+/**
+ * @brief Locate the first occurrence of a character in a C-style string.
+ *
+ * This function searches the null-terminated string `str` for the first
+ * occurrence of the character specified by `ch`. If found, it returns a
+ * pointer to the matching character within the string. If the character
+ * is not found, the function returns nullptr.
+ *
+ * @param str Pointer to a null-terminated C-style string to be searched.
+ * @param ch  Character to locate, passed as an int but compared as an unsigned char.
+ *
+ * @return const char* Pointer to the first occurrence of `ch` in `str`,
+ *         or nullptr if the character is not found.
+ *
+ * @note If `ch` is '\0', the function returns a pointer to the string's
+ *       terminating null character.
+ *
+ * @example
+ * const char* text = "Hello";
+ * const char* result = StrChr(text, 'e');
+ * // result points to "ello"
+ * // *result == 'e'
+ */
+const char* StrChr(const char* str, int ch);
+
+void StrRev(char* str);
