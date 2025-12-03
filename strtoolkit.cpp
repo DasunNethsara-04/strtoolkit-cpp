@@ -107,3 +107,29 @@ void StrCat(const char* src, char* dest) {
 void StrCat(const std::string& src, std::string& dest) {
 	dest += src;
 }
+
+const char* StrChr(const char* str, int ch) {
+	const char* ptr = str;
+	while (*ptr != '\0') {
+		if (*ptr == static_cast<unsigned char>(ch))
+			return ptr;
+		ptr++;
+	}
+	return nullptr;
+}
+
+void StrRev(char* str) {
+	size_t len = StrLen(str);
+	char* start = str;
+	char* end = str + (len - 1);
+	char temp{};
+
+	while (start < end) {
+		temp = *start;
+		*start = *end;
+		*end = temp;
+
+		start++;
+		end--;
+	}
+}
