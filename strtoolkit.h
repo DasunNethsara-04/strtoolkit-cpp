@@ -178,4 +178,24 @@ void StrCat(const std::string& src, std::string& dest);
  */
 const char* StrChr(const char* str, int ch);
 
+/**
+ * @brief Reverse a C-style string in place.
+ *
+ * This function reverses the order of characters in the null-terminated
+ * string `str`. The reversal is performed in place, meaning the original
+ * string is modified directly. The terminating null character remains
+ * at the end of the reversed string.
+ *
+ * @param str Pointer to a null-terminated C-style string to be reversed.
+ *
+ * @return void No return value. The input string is modified directly.
+ *
+ * @note If `str` is empty or contains a single character, the function
+ *       leaves it unchanged.
+ *
+ * @example
+ * char text[] = "Hello";
+ * StrRev(text);
+ * // text now contains "olleH"
+ */
 void StrRev(char* str);
