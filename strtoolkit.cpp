@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "strtoolkit.h"
 
 /**
@@ -76,7 +77,7 @@ void StrCpy(const char* src, char* dest) {
 }
 
 void StrCpy(const std::string& src, std::string& dest) {
-	// this thing can easily can perform with dest = src.
+	// this thing can easily perform with dest = src.
 	// This is just a code to practice and test my knowledge about pointers
 	dest.resize(src.size());
 	const char* ptr1 = src.c_str();
@@ -88,4 +89,21 @@ void StrCpy(const std::string& src, std::string& dest) {
 		++ptr1;
 		++ptr2;
 	}
+}
+
+void StrCat(const char* src, char* dest) {
+	const char* src_ptr = src;
+	char* dest_ptr = dest;
+
+	while (*dest_ptr != '\0') dest_ptr++;
+	while (*src_ptr != '\0') {
+		*dest_ptr = *src_ptr;
+		src_ptr++;
+		dest_ptr++;
+	}
+	*dest_ptr = '\0';
+}
+
+void StrCat(const std::string& src, std::string& dest) {
+	dest += src;
 }
