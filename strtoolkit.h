@@ -110,3 +110,46 @@ void StrCpy(const char* src, char* dest);
  * // b now contains "World"
  */
 void StrCpy(const std::string& src, std::string& dest);
+
+/**
+ * @brief Concatenates a C-style string onto another buffer.
+ *
+ * Appends the characters from the source string (src) to the end of the
+ * destination string (dest). Traverses dest until its null terminator ('\0'),
+ * then copies characters from src until its null terminator is reached.
+ * Finally, writes a new null terminator at the end of dest.
+ *
+ * @param src Pointer to the source null-terminated C-style string.
+ *            Must not be nullptr.
+ * @param dest Pointer to the destination buffer containing a valid
+ *             null-terminated C-style string. Must be large enough to hold
+ *             the existing contents of dest plus all characters from src
+ *             including the null terminator.
+ *
+ * @note Passing nullptr or insufficient buffer size results in undefined behavior.
+ * @example
+ * char buffer[20] = "Hello";
+ * StrCat(" World", buffer);
+ * // buffer now contains "Hello World"
+ */
+
+
+void StrCat(const char* src, char* dest);
+
+/**
+ * @brief Concatenates one std::string onto another.
+ *
+ * Appends the contents of the source string (src) to the destination string (dest).
+ * Uses std::string's built-in memory management to ensure safe concatenation.
+ *
+ * @param src Reference to the source std::string.
+ * @param dest Reference to the destination std::string, which will be extended
+ *             to include the contents of src.
+ *
+ * @example
+ * std::string a = "Hello";
+ * std::string b = " World";
+ * StrCat(b, a);
+ * // a now contains "Hello World"
+ */
+void StrCat(const std::string& src, std::string& dest);
