@@ -178,4 +178,62 @@ void StrCat(const std::string& src, std::string& dest);
  */
 const char* StrChr(const char* str, int ch);
 
+/**
+ * @brief Reverse a C-style string in place.
+ *
+ * This function reverses the order of characters in the null-terminated
+ * string `str`. The reversal is performed in place, meaning the original
+ * string is modified directly. The terminating null character remains
+ * at the end of the reversed string.
+ *
+ * @param str Pointer to a null-terminated C-style string to be reversed.
+ *
+ * @return void No return value. The input string is modified directly.
+ *
+ * @note If `str` is empty or contains a single character, the function
+ *       leaves it unchanged.
+ *
+ * @example
+ * char text[] = "Hello";
+ * StrRev(text);
+ * // text now contains "olleH"
+ */
 void StrRev(char* str);
+
+/**
+ * @brief Converts all characters in a C-style string to uppercase.
+ *
+ * Traverses the string character by character using a pointer and
+ * replaces each lowercase letter with its uppercase equivalent.
+ * Non-alphabetic characters are left unchanged. The conversion
+ * is done in-place, modifying the original string.
+ *
+ * @param str Pointer to a null-terminated C-style string.
+ *            Must not be nullptr. The buffer must be writable.
+ *
+ * @note Passing nullptr results in undefined behavior.
+ * @example
+ * char buffer[] = "Hello World!";
+ * ToUpper(buffer);
+ * // buffer now contains "HELLO WORLD!"
+ */
+void ToUpper(char* str);
+
+/**
+ * @brief Converts all characters in a std::string to uppercase.
+ *
+ * Traverses the internal buffer of the std::string using a pointer
+ * and replaces each lowercase letter with its uppercase equivalent.
+ * Non-alphabetic characters are left unchanged. The conversion
+ * is done in-place, modifying the original string.
+ *
+ * @param str Reference to a std::string object.
+ *            The string will be modified directly.
+ *
+ * @note If the string is empty, no changes are made.
+ * @example
+ * std::string text = "Hello World!";
+ * ToUpper(text);
+ * // text now contains "HELLO WORLD!"
+ */
+void ToUpper(std::string& str);
