@@ -1,4 +1,4 @@
-#include <stdexcept>
+#include <cctype>
 #include "strtoolkit.h"
 
 /**
@@ -98,8 +98,8 @@ void StrCat(const char* src, char* dest) {
 	while (*dest_ptr != '\0') dest_ptr++;
 	while (*src_ptr != '\0') {
 		*dest_ptr = *src_ptr;
-		src_ptr++;
-		dest_ptr++;
+		++src_ptr;
+		++dest_ptr;
 	}
 	*dest_ptr = '\0';
 }
@@ -113,7 +113,7 @@ const char* StrChr(const char* str, int ch) {
 	while (*ptr != '\0') {
 		if (*ptr == static_cast<unsigned char>(ch))
 			return ptr;
-		ptr++;
+		++ptr;
 	}
 	return nullptr;
 }
@@ -129,7 +129,28 @@ void StrRev(char* str) {
 		*start = *end;
 		*end = temp;
 
-		start++;
-		end--;
+		++start;
+		--end;
+	}
+}
+
+char get_upper(char c) {
+	return std::toupper(static_cast<unsigned char>(c));
+}
+
+void ToUpper(char* str) {
+	char* ptr = str;
+	while (*ptr != '\0') {
+		*ptr = get_upper(*ptr);
+		++ptr;
+	}
+}
+
+void ToUpper(std::string& str) {
+	if (str.empty()) return;
+	char* ptr = &str[0];
+	while (*ptr != '\0') {
+		*ptr = get_upper(*ptr);
+		++ptr;
 	}
 }
