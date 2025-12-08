@@ -19,22 +19,6 @@
 size_t StrLen(const char* str);
 
 /**
- * @brief Calculates the length of a std::string.
- *
- * Iterates through the internal character buffer of the std::string until
- * the null terminator is reached. This function demonstrates pointer-based
- * traversal, but for production code prefer std::string::size().
- *
- * @param str A reference to a std::string object.
- * @return The number of characters in the string.
- *
- * @example
- * std::string text = "World";
- * size_t len = StrLen(text); // len = 5
- */
-size_t StrLen(const std::string& str);
-
-/**
  * @brief Compares two C-style strings for equality.
  *
  * Traverses both strings character by character using pointers.
@@ -53,22 +37,6 @@ size_t StrLen(const std::string& str);
  */
 bool StrCmp(const char* str1, const char* str2);
 
-/**
- * @brief Compares two std::string objects for equality using pointer traversal.
- *
- * Uses c_str() to access the internal buffer of each string and compares
- * them character by character until the null terminator.
- *
- * @param str1 Reference to the first std::string.
- * @param str2 Reference to the second std::string.
- * @return true if the strings are equal, false otherwise.
- *
- * @example
- * std::string a = "World";
- * std::string b = "World";
- * bool equal = StrCmp(a, b); // true
- */
-bool StrCmp(const std::string& str1, const std::string& str2);
 
 /**
  * @brief Copies a C-style string into another buffer.
@@ -90,26 +58,6 @@ bool StrCmp(const std::string& str1, const std::string& str2);
  * // buffer now contains "Hello"
  */
 void StrCpy(const char* src, char* dest);
-
-/**
- * @brief Copies the contents of one std::string into another using pointer traversal.
- *
- * Resizes the destination string to match the source string length,
- * then copies each character from the source into the destination
- * using pointers. The null terminator is managed automatically by
- * std::string and does not need to be copied manually.
- *
- * @param src Reference to the source std::string.
- * @param dest Reference to the destination std::string, which will be resized
- *             and overwritten with the contents of src.
- *
- * @example
- * std::string a = "World";
- * std::string b;
- * StrCpy(a, b);
- * // b now contains "World"
- */
-void StrCpy(const std::string& src, std::string& dest);
 
 /**
  * @brief Concatenates a C-style string onto another buffer.
@@ -135,23 +83,6 @@ void StrCpy(const std::string& src, std::string& dest);
 
 void StrCat(const char* src, char* dest);
 
-/**
- * @brief Concatenates one std::string onto another.
- *
- * Appends the contents of the source string (src) to the destination string (dest).
- * Uses std::string's built-in memory management to ensure safe concatenation.
- *
- * @param src Reference to the source std::string.
- * @param dest Reference to the destination std::string, which will be extended
- *             to include the contents of src.
- *
- * @example
- * std::string a = "Hello";
- * std::string b = " World";
- * StrCat(b, a);
- * // a now contains "Hello World"
- */
-void StrCat(const std::string& src, std::string& dest);
 
 /**
  * @brief Locate the first occurrence of a character in a C-style string.
@@ -219,21 +150,31 @@ void StrRev(char* str);
  */
 void ToUpper(char* str);
 
+void ToLower(char* str);
+
 /**
- * @brief Converts all characters in a std::string to uppercase.
+ * @brief Safely copies up to n characters from a C-style string into another buffer.
  *
- * Traverses the internal buffer of the std::string using a pointer
- * and replaces each lowercase letter with its uppercase equivalent.
- * Non-alphabetic characters are left unchanged. The conversion
- * is done in-place, modifying the original string.
+ * Traverses the source string (src) character by character and writes each
+ * character into the destination buffer (dest) until either n characters
+ * have been copied or the null terminator ('\0') in src is reached.
+ * Always writes a null terminator at the end of dest to ensure it is a
+ * valid C-style string.
  *
- * @param str Reference to a std::string object.
- *            The string will be modified directly.
+ * @param dest Pointer to the destination buffer. Must be large enough to hold
+ *             at least n characters plus the null terminator.
+ * @param src Pointer to the source null-terminated C-style string. Must not be nullptr.
+ * @param n Maximum number of characters to copy from src.
  *
- * @note If the string is empty, no changes are made.
+ * @note Unlike the standard strncpy, this safe version always null-terminates
+ *       the destination string and does not pad with additional '\0' characters.
  * @example
- * std::string text = "Hello World!";
- * ToUpper(text);
- * // text now contains "HELLO WORLD!"
+ * char buffer[10];
+ * StrNCpy(buffer, "HelloWorld", 5);
+ * // buffer now contains "Hello"
  */
-void ToUpper(std::string& str);
+void StrNCpy(char* dest, const char* src, const size_t n);
+
+void StrNCat(char* dest, const char* src, const size_t n);
+
+bool StrNCmp(const char* str1, const char* str2, size_t n);
